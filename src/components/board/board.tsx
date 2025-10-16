@@ -5,7 +5,7 @@ import { Tile } from "./Tile";
 export const Board = () => {
   const boardState = useBoard();
 
-  const board = boardState.board;
+  const board = boardState.game.board;
   const length = board.length;
 
   const gridColsClass = `grid grid-cols-${length}`;
@@ -14,16 +14,16 @@ export const Board = () => {
     (e: KeyboardEvent) => {
       e.preventDefault();
       if (e.key === "ArrowUp") {
-        console.log("up");
+        boardState.move("up");
       } else if (e.key === "ArrowDown") {
-        console.log("down");
+        boardState.move("down");
       } else if (e.key === "ArrowLeft") {
-        console.log("left");
+        boardState.move("left");
       } else if (e.key === "ArrowRight") {
-        console.log("right");
+        boardState.move("right");
       }
     },
-    [boardState.status]
+    [boardState.game.board]
   );
 
   useEffect(() => {
@@ -34,15 +34,18 @@ export const Board = () => {
   }, [keyPressCallback]);
 
   return (
-    <div
-      className={`w-3/5 h-2/3 ${gridColsClass} gap-1 bg-gray-500 p-1 rounded-sm shadow-md`}
-    >
-      {boardState.board.flatMap((row: number[], i: number) =>
-        row.map((value, j) => {
-          const key = `${i}:${j}`;
-          return <Tile value={value} key={key} />;
-        })
-      )}
+    <div className={`pt-[20vh] sm:pt-[15vh]`}>
+      <div
+        className={`
+          w-[50vw] h-[50vw] max-w-[500px] max-h-[500px] ${gridColsClass} gap-1 bg-gray-500 p-1 rounded-sm shadow-md`}
+      >
+        {boardState.game.board.flatMap((row: number[], i: number) =>
+          row.map((value, j) => {
+            const key = `${i}:${j}`;
+            return <Tile value={value} key={key} />;
+          })
+        )}
+      </div>
     </div>
   );
 };

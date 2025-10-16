@@ -1,4 +1,4 @@
-type direction = "up" | "down" | "left" | "right";
+export type direction = "up" | "down" | "left" | "right";
 
 export interface GameRecord {
   score: number;
