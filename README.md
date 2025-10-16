@@ -1,4 +1,4 @@
-# 🎮 Functional 2048 Game
+# 🎮 2048 Game
 
 A simple implementation of the 2048 game built with React and styled using Tailwind CSS
 
