@@ -1,3 +1,4 @@
+import { useCallback, useEffect } from "react";
 import { useBoard } from "../../hooks/useBoard";
 import { Tile } from "./Tile";
 
@@ -8,6 +9,29 @@ export const Board = () => {
   const length = board.length;
 
   const gridColsClass = `grid grid-cols-${length}`;
+
+  const keyPressCallback = useCallback(
+    (e: KeyboardEvent) => {
+      e.preventDefault();
+      if (e.key === "ArrowUp") {
+        console.log("up");
+      } else if (e.key === "ArrowDown") {
+        console.log("down");
+      } else if (e.key === "ArrowLeft") {
+        console.log("left");
+      } else if (e.key === "ArrowRight") {
+        console.log("right");
+      }
+    },
+    [boardState.status]
+  );
+
+  useEffect(() => {
+    window.addEventListener("keyup", keyPressCallback);
+    return () => {
+      window.removeEventListener("keyup", keyPressCallback);
+    };
+  }, [keyPressCallback]);
 
   return (
     <div
