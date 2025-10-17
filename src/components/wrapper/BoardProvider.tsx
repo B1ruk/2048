@@ -1,4 +1,4 @@
-import React, { Children, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { BoardContext, type GameState } from "../../context/BoardState";
 import type { direction, GameRecord } from "../../models/game";
 import { checkGameStatus, handleMove } from "../../logic/gameLogic";
@@ -15,7 +15,9 @@ const getInitialBoard = (n: number = 4): number[][] => {
 
 const getRandomIndex = (n: number) => Math.floor(Math.random() * n);
 
-export const BoardProvider = ({ children }) => {
+export const BoardProvider: React.FC<React.PropsWithChildren<{}>> = ({
+  children,
+}) => {
   const [game, setGame] = useState<GameRecord>({
     score: 0,
     status: "playing",
